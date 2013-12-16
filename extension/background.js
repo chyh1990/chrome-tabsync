@@ -1,5 +1,5 @@
 var pollInterval = 1000 * 2; // 1 minute
-var REMOTE = 'http://10.0.0.2:4567/posttab'
+var REMOTE = 'http://10.0.0.8:9456/posttab'
 var timerId;
 var urls = [];
 

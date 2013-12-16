@@ -11,7 +11,7 @@
   "permissions": [
 	  "tabs",
 
-	"http://10.0.0.2/*"
+	"http://10.0.0.8/*"
   ],
   "background": {
     "scripts": ["jquery.min.js", "background.js"]

@@ -5,7 +5,7 @@
 </div>
 
 <script type="text/javascript" 
-        src="http://10.0.0.2:9001/faye/client.js">
+src="<%= faye_js %>">
 </script>
 <script>
 
@@ -49,7 +49,7 @@ function refresh(){
 }
 
 $(function(){
-	var client = new Faye.Client('http://10.0.0.2:9001/faye');
+		var client = new Faye.Client('<%= faye_url %>');
 	client.subscribe('/tab/' + myid, function(data){
 		console.log(data);
 		dowork();
