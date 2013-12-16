@@ -1,0 +1,27 @@
+body {
+	background-color: #eee;
+}
+
+#list{
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+div.linkitem{
+	width: 100%;
+	height: 70px;
+	margin: 5px;
+	border: 1px solid #999;
+	overflow: hidden;
+	padding: 5px;	
+}
+
+div.linkitem a{
+	padding-left: 10px
+}
+
+img.linkicon{
+	width: 32px;
+	height: 32px;
+}
+

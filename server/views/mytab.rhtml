@@ -1,0 +1,60 @@
+<div class="container">
+	<h1><%= @id %>'s Tabs</h1>
+	<div id="list">
+	</div>
+</div>
+
+<script type="text/javascript" 
+        src="http://10.0.0.2:9001/faye/client.js">
+</script>
+<script>
+
+var pollInterval = 1000 * 5; //5s
+var myid = "<%= @id %>";
+function updatelist(data)
+{
+			if(data == null)
+				return;
+			var oldurls = [], newurls = [];
+			$.each(data, function(i,e){newurls.push(e.url)});
+			$(".linkitem").each(function(i,_e){
+				var e = $(_e);
+				if($.inArray(e.data('url'), newurls) == -1)
+					e.remove();
+				else
+					oldurls.push(e.data('url'));
+			});
+			$.each(data, function(i, e){
+				//console.log(e);
+				if($.inArray(e.url, oldurls)==-1){
+				var icon = '/img/defaulticon.ico';
+				if(e.favIconUrl)
+					icon = e.favIconUrl;
+				var item = $('<div class="linkitem"><img class="linkicon" src="'+icon+'"></img><a target="_blank" href="' + e.url + '">' + e.title + '</a></div>')
+				.prependTo("#list").data('url', e.url);
+				}
+
+			});
+
+}
+
+function dowork(){
+	$.getJSON('/gettab?id=' + myid, function(data){
+			updatelist(data);
+	});
+}
+function refresh(){
+	dowork();
+	window.setTimeout(refresh, pollInterval);
+}
+
+$(function(){
+	var client = new Faye.Client('http://10.0.0.2:9001/faye');
+	client.subscribe('/tab/' + myid, function(data){
+		console.log(data);
+		dowork();
+	});
+	dowork();
+	//refresh();
+	});
+</script>
